@@ -45,7 +45,7 @@ Use `SUPABASE_PROJECT_REF=jjypcucugbtmfjynhuvh`. Do not use the REST URL as the 
 
 ## Applying Migrations
 
-Use the local helper so the database password is prompted at runtime and never committed:
+Use the local helper so the database password is prompted at runtime, never committed, and applied through the direct Postgres connection instead of the Supabase linked/pooler path:
 
 ```powershell
 C:\Users\ASUS\.cache\codex-runtimes\codex-primary-runtime\dependencies\bin\pnpm.cmd run supabase:push
@@ -57,4 +57,4 @@ To preview pending migrations first:
 C:\Users\ASUS\.cache\codex-runtimes\codex-primary-runtime\dependencies\bin\pnpm.cmd run supabase:push:dry-run
 ```
 
-The helper clears `SUPABASE_DB_PASSWORD` from the process after the command finishes.
+The helper builds the direct Postgres URL in memory and clears password variables from the process after the command finishes.

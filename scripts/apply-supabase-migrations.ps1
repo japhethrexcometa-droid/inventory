@@ -4,6 +4,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 
+$projectRef = "jjypcucugbtmfjynhuvh"
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
 Set-Location $repoRoot
 
@@ -18,22 +19,29 @@ $setPasswordForThisRun = [string]::IsNullOrWhiteSpace($existingPassword)
 if ($setPasswordForThisRun) {
   $securePassword = Read-Host "Supabase DB password" -AsSecureString
   $plainPassword = [System.Net.NetworkCredential]::new("", $securePassword).Password
-  [Environment]::SetEnvironmentVariable("SUPABASE_DB_PASSWORD", $plainPassword, "Process")
+} else {
+  $plainPassword = $existingPassword
 }
+
+$encodedPassword = [uri]::EscapeDataString($plainPassword)
+$dbUrl = "postgresql://postgres:$encodedPassword@db.$projectRef.supabase.co:5432/postgres"
 
 try {
   if ($DryRun) {
-    & $supabaseCli db push --dry-run
+    & $supabaseCli db push --db-url $dbUrl --dry-run
   } else {
-    & $supabaseCli db push
+    & $supabaseCli db push --db-url $dbUrl
   }
 
   if ($LASTEXITCODE -ne 0) {
     throw "supabase db push failed with exit code $LASTEXITCODE"
   }
 } finally {
-  if ($setPasswordForThisRun) {
-    [Environment]::SetEnvironmentVariable("SUPABASE_DB_PASSWORD", $null, "Process")
+  if (Get-Variable dbUrl -ErrorAction SilentlyContinue) {
+    Remove-Variable dbUrl -Force
+  }
+  if (Get-Variable encodedPassword -ErrorAction SilentlyContinue) {
+    Remove-Variable encodedPassword -Force
   }
   if (Get-Variable plainPassword -ErrorAction SilentlyContinue) {
     Remove-Variable plainPassword -Force
