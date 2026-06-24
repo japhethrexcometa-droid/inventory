@@ -1,0 +1,6 @@
+interface:
+  display_name: "Engineer First"
+  short_description: "GitHub, Supabase, auth, security"
+  default_prompt: "Use $engineer-first to inspect the system, protect Git history, check Supabase/auth/security boundaries, implement a reliable change, and verify it."
+policy:
+  allow_implicit_invocation: true

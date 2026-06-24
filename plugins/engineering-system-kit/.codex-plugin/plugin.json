@@ -1,0 +1,28 @@
+{
+  "name": "engineering-system-kit",
+  "version": "0.1.0",
+  "description": "Full-stack engineering mindset, GitHub workflow, Supabase backend/auth, and system security plugin for Codex.",
+  "author": {
+    "name": "Local developer"
+  },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Engineering System Kit",
+    "shortDescription": "Engineer-first GitHub, Supabase, auth, security.",
+    "longDescription": "Engineering System Kit adds an engineer-first workflow for full-stack design, fixing, debugging, architecture, system flow, GitHub version control, Supabase backend/auth/security, authentication, authorization, application security, reliability, verification, and implementation discipline.",
+    "developerName": "Local developer",
+    "category": "Productivity",
+    "capabilities": [
+      "Engineering design",
+      "Debugging",
+      "Architecture",
+      "GitHub version control",
+      "Supabase backend and auth",
+      "Authentication and authorization",
+      "Application security",
+      "Full-stack implementation",
+      "System flow analysis"
+    ],
+    "defaultPrompt": "Use the engineer-first skill before changing the system. Inspect the codebase, protect Git history, check Supabase/auth/security boundaries, choose the right engineering lens, implement the smallest reliable change, and verify the result."
+  }
+}
