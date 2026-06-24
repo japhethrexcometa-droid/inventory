@@ -42,3 +42,19 @@ Use `SUPABASE_PROJECT_REF=jjypcucugbtmfjynhuvh`. Do not use the REST URL as the 
 - Test allowed and denied cases for user-owned and role-protected data.
 - Use server-side code for privileged operations that require service role access.
 - Never use service-role access in browser code.
+
+## Applying Migrations
+
+Use the local helper so the database password is prompted at runtime and never committed:
+
+```powershell
+C:\Users\ASUS\.cache\codex-runtimes\codex-primary-runtime\dependencies\bin\pnpm.cmd run supabase:push
+```
+
+To preview pending migrations first:
+
+```powershell
+C:\Users\ASUS\.cache\codex-runtimes\codex-primary-runtime\dependencies\bin\pnpm.cmd run supabase:push:dry-run
+```
+
+The helper clears `SUPABASE_DB_PASSWORD` from the process after the command finishes.

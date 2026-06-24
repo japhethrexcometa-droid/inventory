@@ -1,5 +1,10 @@
 {
-	"devDependencies": {
-		"supabase": "^2.107.0"
-	}
+  "scripts": {
+    "supabase:version": "supabase --version",
+    "supabase:push": "powershell -ExecutionPolicy Bypass -File ./scripts/apply-supabase-migrations.ps1",
+    "supabase:push:dry-run": "powershell -ExecutionPolicy Bypass -File ./scripts/apply-supabase-migrations.ps1 -DryRun"
+  },
+  "devDependencies": {
+    "supabase": "^2.107.0"
+  }
 }
